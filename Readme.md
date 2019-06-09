@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 - Студент: [Dasha Pishta](https://up.htmlacademy.ru/javascript/17/user/1028665).
-- Наставник: [Ivan Chirva](https://htmlacademy.ru/profile/id1042623).
+- Наставник: [Ivan Chirva](https://htmlacademy.ru/profile/id1042623)].
 
 ---
 
