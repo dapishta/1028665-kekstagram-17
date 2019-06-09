@@ -8,9 +8,7 @@ var PHOTO_ITEM_TAG = document
   .content.querySelector('.picture');
 var PHOTO_ITEM_IMG_TAG = PHOTO_ITEM_TAG.querySelector('.picture__img');
 var PHOTO_ITEM_LIKES_TAG = PHOTO_ITEM_TAG.querySelector('.picture__likes');
-var PHOTO_ITEM_COMMENTS_TAG = PHOTO_ITEM_TAG.querySelector(
-  '.picture__comments'
-);
+var PHOTO_ITEM_COMMENTS_TAG = PHOTO_ITEM_TAG.querySelector('.picture__comments');
 
 // Data
 var comments = [
