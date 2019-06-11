@@ -38,22 +38,12 @@ var names = [
 // Create random number from to. User can enter one or two number in ascending or descending order.
 
 var getRandomNumber = function (numFirst, numSecond) {
-  var result = -Infinity;
   if (numSecond) {
-    if (numFirst <= numSecond) {
-      while (result < numFirst) {
-        result = Math.round(Math.random() * numSecond);
-      }
-    } else {
-      while (result < numSecond) {
-        result = Math.round(Math.random() * numFirst);
-      }
-    }
-  } else {
-    result = Math.round(Math.random() * numFirst);
+    return Math.round(Math.random() * numFirst) + Math.round(Math.random() * numFirst);
   }
-  return result;
+  return Math.round(Math.random() * numFirst);
 };
+
 
 // Create data object
 
