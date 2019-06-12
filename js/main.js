@@ -34,6 +34,8 @@ var getRandomNumber = function (min, max) {
   return Math.round(Math.random() * (max - min) + min)
 };
 
+
+// Get a string from array.
 var getString = function (array, min, max) {
   var randomNumber = Math.round(Math.random() * (max - min) + min);
   return array[randomNumber];
@@ -72,6 +74,7 @@ var createMockData = function (numberOfItems) {
 
 // Create DOM Elements
 var createDOMElements = function (array) {
+
   var photoItemTag = document
     .querySelector('#picture')
     .content.querySelector('.picture');
@@ -79,6 +82,7 @@ var createDOMElements = function (array) {
   var photoItemLikesTag = photoItemTag.querySelector('.picture__likes');
   var photoItemCommentsTag = photoItemTag.querySelector('.picture__comments');
   var fragment = document.createDocumentFragment();
+
   for (var i = 0; i < array.length; i++) {
     photoItemImgTag.src = array[i].url;
     photoItemLikesTag.textContent = array[i].likes;
@@ -87,7 +91,9 @@ var createDOMElements = function (array) {
     }
     fragment.appendChild(photoItemTag.cloneNode(true));
   }
+
   return fragment;
+
 };
 
 // Insert tag inside other tag
