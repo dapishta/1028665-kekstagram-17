@@ -1,7 +1,7 @@
 /* eslint-disable semi */
 'use strict';
 
-// Tags
+// Constants
 var NUMBER_OF_PHOTOS = 25;
 
 // Data
@@ -37,7 +37,7 @@ var getRandomNumber = function (min, max) {
 
 // Get a string from array.
 var getString = function (array, min, max) {
-  var randomNumber = Math.round(Math.random() * (max - min) + min);
+  var randomNumber = getRandomNumber(min, max);
   return array[randomNumber];
 };
 
