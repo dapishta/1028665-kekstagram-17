@@ -52,10 +52,10 @@ var openPopup = function (tag) {
   document.addEventListener('keydown', onPopupEscTagPress);
   uploadCancelBtnTag.addEventListener('click', onPopupCancelTagPress);
   scaleBtnSmallerTag.addEventListener('click', function () {
-    changeScale(changeInputValue(false));
+    updateScale(getNewStepperValue(false));
   })
   scaleBtnBiggerTag.addEventListener('click', function () {
-    changeScale(changeInputValue(true));
+    updateScale(getNewStepperValue(true));
   })
 };
 
@@ -65,12 +65,13 @@ var closePopup = function (tag) {
 };
 
 // Change scale
-var changeInputValue = function (isPositive) {
+var getNewStepperValue = function (isPositive) {
   var inputTagValue = scaleInputTag.value
   var currentValue = parseInt(inputTagValue, 10);
+  var newValue = currentValue;
 
   if (isPositive) {
-    var newValue = currentValue + SCALE_PERCENTAGE;
+    newValue = currentValue + SCALE_PERCENTAGE;
     if (newValue > 100) {
       newValue = 100;
     }
@@ -83,7 +84,7 @@ var changeInputValue = function (isPositive) {
   return newValue;
 }
 
-var changeScale = function (number) {
+var updateScale = function (number) {
   scaleInputTag.value = number;
   var cssScale = number / 100;
   uploadedImgTag.style.transform = 'scale(' + cssScale + ')';
