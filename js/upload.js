@@ -47,10 +47,10 @@ var addClass = function (tag, className) {
 
 
 // Open and close popup
-var openPopup = function (tag) {
-  removeClass(tag, 'hidden');
-  document.addEventListener('keydown', onPopupEscTagPress);
-  uploadCancelBtnTag.addEventListener('click', onPopupCancelTagPress);
+var openPopup = function () {
+  removeClass(uploadPopupTag, 'hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+  uploadCancelBtnTag.addEventListener('click', onPopupCancelTagClick);
   scaleBtnSmallerTag.addEventListener('click', function () {
     updateScale(getNewStepperValue(false));
   })
@@ -59,9 +59,9 @@ var openPopup = function (tag) {
   })
 };
 
-var closePopup = function (tag) {
-  addClass(tag, 'hidden');
-  document.removeEventListener('keydown', onPopupEscTagPress);
+var closePopup = function () {
+  addClass(uploadPopupTag, 'hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
 };
 
 // Change scale
@@ -92,23 +92,23 @@ var updateScale = function (number) {
 
 
 // Handlers
-var onPopupCancelTagPress = function () {
+var onPopupCancelTagClick = function () {
   closePopup(uploadPopupTag);
 }
 
-var onPopupEscTagPress = function (evt) {
+var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     closePopup(uploadPopupTag);
   }
 }
 
-var onuploadBtnTagClick = function () {
+var onUploadBtnTagClick = function () {
   addClass(effectSliderTag, 'hidden');
   openPopup(uploadPopupTag);
 };
 
 
-uploadBtnTag.addEventListener('change', onuploadBtnTagClick);
+uploadBtnTag.addEventListener('change', onUploadBtnTagClick);
 
 
 // Filters
