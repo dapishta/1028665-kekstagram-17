@@ -46,31 +46,17 @@ var addClass = function (tag, className) {
   tag.classList.add(className);
 }
 
+// Filters
+var currentFilter = false;
 
-// Open and close popup
-var openPopup = function () {
-  removeClass(uploadPopupTag, 'hidden');
-  document.addEventListener('keydown', onPopupEscPress);
-  uploadCancelBtnTag.addEventListener('click', onPopupCancelTagClick);
-  scaleBtnSmallerTag.addEventListener('click', function () {
-    updateScale(getNewStepperValue(false));
-  })
-  scaleBtnBiggerTag.addEventListener('click', function () {
-    updateScale(getNewStepperValue(true));
-  })
-  uploadCommentInputTag.addEventListener('focus', function () {
-    document.removeEventListener('keydown', onPopupEscPress);
-  })
-  uploadCommentInputTag.addEventListener('focusout', function () {
-    document.addEventListener('keydown', onPopupEscPress);
-  })
-};
-
-var closePopup = function () {
-  addClass(uploadPopupTag, 'hidden');
-  document.removeEventListener('keydown', onPopupEscPress);
-  uploadBtnTag.value = '';
-};
+var addFilter = function (filter) {
+  if (currentFilter) {
+    removeClass(uploadedImgTag, currentFilter);
+  }
+  currentFilter = filter;
+  addClass(uploadedImgTag, filter);
+  removeClass(effectSliderTag, 'hidden');
+}
 
 // Change scale
 var getNewStepperValue = function (isPositive) {
@@ -99,62 +85,76 @@ var updateScale = function (number) {
 }
 
 
+// Open and close popup
+var openPopup = function () {
+  removeClass(uploadPopupTag, 'hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+  uploadCancelBtnTag.addEventListener('click', onPopupCancelTagClick);
+  scaleBtnSmallerTag.addEventListener('click', function () {
+    updateScale(getNewStepperValue(false));
+  })
+  scaleBtnBiggerTag.addEventListener('click', function () {
+    updateScale(getNewStepperValue(true));
+  })
+  uploadCommentInputTag.addEventListener('focus', function () {
+    document.removeEventListener('keydown', onPopupEscPress);
+  })
+  uploadCommentInputTag.addEventListener('focusout', function () {
+    document.addEventListener('keydown', onPopupEscPress);
+  })
+
+  effectChromeTag.addEventListener('click', function () {
+    addFilter(effectChromeStyle);
+  })
+
+  effectSepiaTag.addEventListener('click', function () {
+    addFilter(effectSepiaStyle);
+  })
+
+  effectMarvinTag.addEventListener('click', function () {
+    addFilter(effectMarvinStyle);
+  })
+
+  effectPhobosTag.addEventListener('click', function () {
+    addFilter(effectPhobosStyle);
+  })
+
+  effectHeatTag.addEventListener('click', function () {
+    addFilter(effectHeatStyle);
+  })
+
+  effectNoneTag.addEventListener('click', function () {
+    removeClass(uploadedImgTag, currentFilter);
+    addClass(effectSliderTag, 'hidden');
+  })
+
+  effectPinSliderTag.addEventListener('mouseup', function () {
+  })
+};
+
+var closePopup = function () {
+  addClass(uploadPopupTag, 'hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+  uploadBtnTag.value = '';
+};
+
+
 // Handlers
 var onPopupCancelTagClick = function () {
-  closePopup(uploadPopupTag);
+  closePopup();
 }
 
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
-    closePopup(uploadPopupTag);
+    closePopup();
   }
 }
 
 var onUploadBtnTagClick = function () {
   addClass(effectSliderTag, 'hidden');
-  openPopup(uploadPopupTag);
+  openPopup();
+  uploadedImgTag.src = window.URL.createObjectURL(uploadBtnTag.files[0])
 };
 
 
 uploadBtnTag.addEventListener('change', onUploadBtnTagClick);
-
-
-// Filters
-var currentFilter = false;
-
-var addFilter = function (filter) {
-  if (currentFilter) {
-    removeClass(uploadedImgTag, currentFilter);
-  }
-  currentFilter = filter;
-  addClass(uploadedImgTag, filter);
-  removeClass(effectSliderTag, 'hidden');
-}
-
-effectChromeTag.addEventListener('click', function () {
-  addFilter(effectChromeStyle);
-})
-
-effectSepiaTag.addEventListener('click', function () {
-  addFilter(effectSepiaStyle);
-})
-
-effectMarvinTag.addEventListener('click', function () {
-  addFilter(effectMarvinStyle);
-})
-
-effectPhobosTag.addEventListener('click', function () {
-  addFilter(effectPhobosStyle);
-})
-
-effectHeatTag.addEventListener('click', function () {
-  addFilter(effectHeatStyle);
-})
-
-effectNoneTag.addEventListener('click', function () {
-  removeClass(uploadedImgTag, currentFilter);
-  addClass(effectSliderTag, 'hidden');
-})
-
-effectPinSliderTag.addEventListener('mouseup', function () {
-})
