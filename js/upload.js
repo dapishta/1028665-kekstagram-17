@@ -11,6 +11,7 @@ var uploadBtnTag = document.querySelector('#upload-file');
 var uploadPopupTag = document.querySelector('.img-upload__overlay');
 var uploadedImgTag = uploadPopupTag.querySelector('.img-upload__preview img');
 var uploadCancelBtnTag = uploadPopupTag.querySelector('.img-upload__cancel');
+var uploadCommentInputTag = uploadPopupTag.querySelector('.text__description');
 
 // Scale
 var scaleBtnSmallerTag = uploadPopupTag.querySelector('.scale__control--smaller');
@@ -57,11 +58,18 @@ var openPopup = function () {
   scaleBtnBiggerTag.addEventListener('click', function () {
     updateScale(getNewStepperValue(true));
   })
+  uploadCommentInputTag.addEventListener('focus', function () {
+    document.removeEventListener('keydown', onPopupEscPress);
+  })
+  uploadCommentInputTag.addEventListener('focusout', function () {
+    document.addEventListener('keydown', onPopupEscPress);
+  })
 };
 
 var closePopup = function () {
   addClass(uploadPopupTag, 'hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  uploadBtnTag.value = '';
 };
 
 // Change scale
