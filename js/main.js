@@ -87,7 +87,7 @@ var createDOMElements = function (array) {
     photoItemImgTag.src = array[i].url;
     photoItemLikesTag.textContent = array[i].likes;
     for (var u = 0; u < array[i].comment.length; u++) {
-      photoItemCommentsTag.textContent += array[i].comment[u];
+      photoItemCommentsTag.textContent = array[i].comment.length;
     }
     fragment.appendChild(photoItemTag.cloneNode(true));
   }
