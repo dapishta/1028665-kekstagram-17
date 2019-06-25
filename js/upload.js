@@ -33,9 +33,11 @@ var effectMarvinStyle = 'effects__preview--marvin';
 var effectPhobosStyle = 'effects__preview--phobos';
 var effectHeatStyle = 'effects__preview--heat';
 
-var effectSliderTag = uploadPopupTag.querySelector('.img-upload__effect-level');
+var effectSliderTag = document.querySelector('.effect-level');
 var effectPinSliderTag = uploadPopupTag.querySelector('.effect-level__pin');
-
+var effectInputTag = document.querySelector('.effect-level__value');
+var effectLevelDepthTag = uploadPopupTag.querySelector('.effect-level__depth');
+var startCoordsPercentage = 100;
 
 // Remove and add class
 var removeClass = function (tag, className) {
@@ -52,15 +54,18 @@ var currentFilter = false;
 var addFilter = function (filter) {
   if (currentFilter) {
     removeClass(uploadedImgTag, currentFilter);
+    uploadedImgTag.style.filter = '';
   }
   currentFilter = filter;
   addClass(uploadedImgTag, filter);
+  effectLevelDepthTag.style.width = '100%';
+  effectPinSliderTag.style.left = '100%';
   removeClass(effectSliderTag, 'hidden');
 }
 
 // Change scale
 var getNewStepperValue = function (isPositive) {
-  var inputTagValue = scaleInputTag.value
+  var inputTagValue = scaleInputTag.value;
   var currentValue = parseInt(inputTagValue, 10);
   var newValue = currentValue;
 
@@ -79,7 +84,7 @@ var getNewStepperValue = function (isPositive) {
 }
 
 var updateScale = function (number) {
-  scaleInputTag.value = number;
+  scaleInputTag.setAttribute('value', number);
   var cssScale = number / 100;
   uploadedImgTag.style.transform = 'scale(' + cssScale + ')';
 }
@@ -128,7 +133,57 @@ var openPopup = function () {
     addClass(effectSliderTag, 'hidden');
   })
 
-  effectPinSliderTag.addEventListener('mouseup', function () {
+  effectPinSliderTag.addEventListener('mousedown', function (evt) {
+    var startCoordsX = evt.clientX;
+    var effectSliderWidth = effectSliderTag.offsetWidth;
+
+    var onMouseMove = function (moveEvt) {
+      var shiftX = startCoordsX - moveEvt.clientX;
+      var calculateShiftPercentage = function () {
+        var num = shiftX * 100 / effectSliderWidth;
+        return num.toFixed(2);
+      }
+      var shiftPercentage = calculateShiftPercentage();
+      startCoordsX = moveEvt.clientX;
+      var currentPinPercentage = startCoordsPercentage - shiftPercentage;
+      if (currentPinPercentage < 0) {
+        currentPinPercentage = 0;
+      } else if (currentPinPercentage > 100) {
+        currentPinPercentage = 100;
+      }
+
+      effectPinSliderTag.style.left = currentPinPercentage + '%';
+      startCoordsPercentage = currentPinPercentage;
+      effectInputTag.setAttribute('value', currentPinPercentage.toFixed(2));
+
+      var calculateFilterStrength = function (min, max) {
+        return (max - min) / 100 * currentPinPercentage + min;
+      }
+
+      if (currentFilter === 'effects__preview--chrome') {
+        uploadedImgTag.style.filter = 'grayscale(' + calculateFilterStrength(0, 1) + ')';
+      }
+      if (currentFilter === 'effects__preview--sepia') {
+        uploadedImgTag.style.filter = 'sepia(' + calculateFilterStrength(0, 1) + ')';
+      }
+      if (currentFilter === 'effects__preview--marvin') {
+        uploadedImgTag.style.filter = 'invert(' + calculateFilterStrength(0, 100) + '%)';
+      }
+      if (currentFilter === 'effects__preview--phobos') {
+        uploadedImgTag.style.filter = 'blur(' + calculateFilterStrength(0, 3) + 'px)';
+      }
+      if (currentFilter === 'effects__preview--heat') {
+        uploadedImgTag.style.filter = 'brightness(' + calculateFilterStrength(1, 3) + ')';
+      }
+    }
+
+    var onMouseUp = function () {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
   })
 };
 
