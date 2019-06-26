@@ -153,6 +153,7 @@ var openPopup = function () {
       }
 
       effectPinSliderTag.style.left = currentPinPercentage + '%';
+      effectLevelDepthTag.style.width = currentPinPercentage + '%';
       startCoordsPercentage = currentPinPercentage;
       effectInputTag.setAttribute('value', currentPinPercentage.toFixed(2));
 
@@ -184,6 +185,7 @@ var openPopup = function () {
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
+    startCoordsX = '';
   })
 };
 
