@@ -38,6 +38,8 @@ var effectPinSliderTag = uploadPopupTag.querySelector('.effect-level__pin');
 var effectInputTag = document.querySelector('.effect-level__value');
 var effectLevelDepthTag = uploadPopupTag.querySelector('.effect-level__depth');
 var startCoordsPercentage = 100;
+var currentPinPercentage = 100;
+
 
 // Remove and add class
 var removeClass = function (tag, className) {
@@ -55,6 +57,7 @@ var addFilter = function (filter) {
   if (currentFilter) {
     removeClass(uploadedImgTag, currentFilter);
     uploadedImgTag.style.filter = '';
+    startCoordsPercentage = 100;
   }
   currentFilter = filter;
   addClass(uploadedImgTag, filter);
@@ -144,8 +147,8 @@ var openPopup = function () {
         return num.toFixed(2);
       }
       var shiftPercentage = calculateShiftPercentage();
-      startCoordsX = moveEvt.clientX;
-      var currentPinPercentage = startCoordsPercentage - shiftPercentage;
+
+      currentPinPercentage = startCoordsPercentage - shiftPercentage;
       if (currentPinPercentage < 0) {
         currentPinPercentage = 0;
       } else if (currentPinPercentage > 100) {
@@ -154,6 +157,7 @@ var openPopup = function () {
 
       effectPinSliderTag.style.left = currentPinPercentage + '%';
       effectLevelDepthTag.style.width = currentPinPercentage + '%';
+      startCoordsX = moveEvt.clientX;
       startCoordsPercentage = currentPinPercentage;
       effectInputTag.setAttribute('value', currentPinPercentage.toFixed(2));
 
@@ -185,7 +189,6 @@ var openPopup = function () {
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-    startCoordsX = '';
   })
 };
 
