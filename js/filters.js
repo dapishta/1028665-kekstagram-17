@@ -87,19 +87,19 @@
           return (max - min) / 100 * currentPinPercentage + min;
         }
 
-        if (currentFilter === 'effects__preview--chrome') {
+        if (currentFilter === effectChromeStyle) {
           uploadedImgTag.style.filter = 'grayscale(' + calculateFilterStrength(0, 1) + ')';
         }
-        if (currentFilter === 'effects__preview--sepia') {
+        if (currentFilter === effectSepiaStyle) {
           uploadedImgTag.style.filter = 'sepia(' + calculateFilterStrength(0, 1) + ')';
         }
-        if (currentFilter === 'effects__preview--marvin') {
+        if (currentFilter === effectMarvinStyle) {
           uploadedImgTag.style.filter = 'invert(' + calculateFilterStrength(0, 100) + '%)';
         }
-        if (currentFilter === 'effects__preview--phobos') {
+        if (currentFilter === effectPhobosStyle) {
           uploadedImgTag.style.filter = 'blur(' + calculateFilterStrength(0, 3) + 'px)';
         }
-        if (currentFilter === 'effects__preview--heat') {
+        if (currentFilter === effectHeatStyle) {
           uploadedImgTag.style.filter = 'brightness(' + calculateFilterStrength(1, 3) + ')';
         }
       }

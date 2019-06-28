@@ -2,7 +2,6 @@
 'use strict';
 
 (function () {
-  // Create DOM Elements for photos
 
   var createThumbnails = function (array) {
     var photoItemTag = document

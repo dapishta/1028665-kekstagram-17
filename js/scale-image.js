@@ -12,20 +12,15 @@
   var SCALE_PERCENTAGE = 25;
 
   // Change scale
-  var getNewStepperValue = function (isPositive) {
+  var getNewStepperValue = function (scaleValue) {
     var inputTagValue = scaleInputTag.value;
     var currentValue = parseInt(inputTagValue, 10);
     var newValue = currentValue;
-    if (isPositive) {
-      newValue = currentValue + SCALE_PERCENTAGE;
-      if (newValue > 100) {
-        newValue = 100;
-      }
-    } else {
-      newValue = currentValue - SCALE_PERCENTAGE;
-      if (newValue < 25) {
-        newValue = 25;
-      }
+    newValue = currentValue + scaleValue;
+    if (newValue > 100) {
+      newValue = 100;
+    } else if (newValue < 25) {
+      newValue = 25;
     }
     return newValue;
   }
@@ -38,10 +33,10 @@
 
   var addScaleEventListeners = function () {
     scaleBtnSmallerTag.addEventListener('click', function () {
-      updateScale(getNewStepperValue(false));
+      updateScale(getNewStepperValue(-SCALE_PERCENTAGE));
     })
     scaleBtnBiggerTag.addEventListener('click', function () {
-      updateScale(getNewStepperValue(true));
+      updateScale(getNewStepperValue(SCALE_PERCENTAGE));
     })
   }
 
