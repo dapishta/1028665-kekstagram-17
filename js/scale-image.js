@@ -16,8 +16,11 @@
   var getNewStepperValue = function (scaleValue) {
     var currentValue = parseInt(scaleInputTag.value, 10);
     var newValue = currentValue + scaleValue;
-    if (newValue > 100) newValue = 100;
-    if (newValue < 25) newValue = 25;
+    if (newValue > 100) {
+      newValue = 100;
+    } else if (newValue < 25) {
+      newValue = 25;
+    }
     return newValue;
   }
 
@@ -44,7 +47,6 @@
     scaleBtnSmallerTag.addEventListener('click', onScaleBtnSmallerClick);
     scaleBtnBiggerTag.addEventListener('click', onScaleBtnBiggerClick)
   }
-
 
   window.addScaleEventListeners = addScaleEventListeners;
   window.removeScaleEventListeners = removeScaleEventListeners;
