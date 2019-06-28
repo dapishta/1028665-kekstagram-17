@@ -11,17 +11,13 @@
   var uploadedImgTag = uploadPopupTag.querySelector('.img-upload__preview img');
   var SCALE_PERCENTAGE = 25;
 
+
   // Change scale
   var getNewStepperValue = function (scaleValue) {
-    var inputTagValue = scaleInputTag.value;
-    var currentValue = parseInt(inputTagValue, 10);
-    var newValue = currentValue;
-    newValue = currentValue + scaleValue;
-    if (newValue > 100) {
-      newValue = 100;
-    } else if (newValue < 25) {
-      newValue = 25;
-    }
+    var currentValue = parseInt(scaleInputTag.value, 10);
+    var newValue = currentValue + scaleValue;
+    if (newValue > 100) newValue = 100;
+    if (newValue < 25) newValue = 25;
     return newValue;
   }
 
@@ -31,15 +27,25 @@
     uploadedImgTag.style.transform = 'scale(' + cssScale + ')';
   }
 
+  var onScaleBtnSmallerClick = function () {
+    updateScale(getNewStepperValue(-SCALE_PERCENTAGE));
+  };
+
+  var onScaleBtnBiggerClick = function () {
+    updateScale(getNewStepperValue(SCALE_PERCENTAGE));
+  };
+
   var addScaleEventListeners = function () {
-    scaleBtnSmallerTag.addEventListener('click', function () {
-      updateScale(getNewStepperValue(-SCALE_PERCENTAGE));
-    })
-    scaleBtnBiggerTag.addEventListener('click', function () {
-      updateScale(getNewStepperValue(SCALE_PERCENTAGE));
-    })
+    scaleBtnSmallerTag.addEventListener('click', onScaleBtnSmallerClick);
+    scaleBtnBiggerTag.addEventListener('click', onScaleBtnBiggerClick)
   }
 
-  window.addScaleEventListeners = addScaleEventListeners;
+  var removeScaleEventListeners = function () {
+    scaleBtnSmallerTag.addEventListener('click', onScaleBtnSmallerClick);
+    scaleBtnBiggerTag.addEventListener('click', onScaleBtnBiggerClick)
+  }
 
+
+  window.addScaleEventListeners = addScaleEventListeners;
+  window.removeScaleEventListeners = removeScaleEventListeners;
 })();

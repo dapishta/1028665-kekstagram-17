@@ -13,6 +13,7 @@
   var uploadCancelBtnTag = uploadPopupTag.querySelector('.img-upload__cancel');
   var uploadForm = document.querySelector('.img-upload__form');
   var addFiltersEventListeners = window.addFiltersEventListeners;
+  var removeScaleEventListeners = window.removeScaleEventListeners;
 
   // Open and close popup
   var openPopup = function () {
@@ -33,6 +34,7 @@
     utils.addClass(uploadPopupTag, 'hidden');
     document.removeEventListener('keydown', onPopupEscPress);
     uploadBtnTag.value = '';
+    removeScaleEventListeners();
   };
 
   // Handlers
