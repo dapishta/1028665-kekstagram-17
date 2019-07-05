@@ -21,17 +21,15 @@
     xhr.open('GET', URL);
     xhr.send();
 
-    // xhr.addEventListener('error', function () {
-    //   onError('Произошла ошибка соединения');
-    // });
+    xhr.addEventListener('error', function () {
+      onError('Произошла ошибка соединения');
+    });
 
-    // xhr.addEventListener('timeout', function () {
-    //   onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
-    // });
+    xhr.addEventListener('timeout', function () {
+      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+    });
 
-    // xhr.timeout = 10000; // 10s
-
-
+    xhr.timeout = 10000; // 10s
   }
 
   window.load = load;

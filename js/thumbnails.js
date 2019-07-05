@@ -13,7 +13,7 @@
     var photoItemCommentsTag = photoItemTag.querySelector('.picture__comments');
     var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i <= number; i++) {
+    for (var i = 0; i < number; i++) {
       photoItemImgTag.src = array[i].url;
       photoItemLikesTag.textContent = array[i].likes;
       photoItemCommentsTag.textContent = array[i].comments.length;
