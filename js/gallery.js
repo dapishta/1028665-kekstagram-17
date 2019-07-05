@@ -4,17 +4,20 @@
 (function () {
   var NUMBER_OF_PHOTOS = 25;
   var utils = window.utils;
-  var createMockData = window.createMockData;
   var insertTag = utils.insertTag;
   var createThumbnails = window.createThumbnails;
 
-  var renderPhotos = function (numberOfPhotos) {
+
+  var onSuccess = function (photos) {
     var photoListTag = document.querySelector('.pictures');
-    var photos = createMockData(numberOfPhotos);
-    var createdPhotosFragmentTag = createThumbnails(photos);
+    var createdPhotosFragmentTag = createThumbnails(NUMBER_OF_PHOTOS, photos);
     insertTag(createdPhotosFragmentTag, photoListTag);
   };
+  var onError = function (error) {
+    console.log(error);
+  };
 
-  renderPhotos(NUMBER_OF_PHOTOS);
+  window.load(onSuccess, onError);
+
 
 })();
