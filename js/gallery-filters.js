@@ -39,9 +39,7 @@
     switch (chosenFilter) {
       case 'discussed':
         discussedPhotos = photos
-          .map(function (photo) {
-            return photo;
-          })
+          .concat([])
           .sort(function (left, right) {
             var difference = right.comments.length - left.comments.length;
             if (difference === 0) {
