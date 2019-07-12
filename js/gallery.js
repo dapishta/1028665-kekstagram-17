@@ -7,12 +7,14 @@
   // var insertTag = utils.insertTag;
   var showFilters = window.showFilters;
   var updatePhotosList = window.updatePhotosList;
+  var showPreview = window.showPreview;
   // var createThumbnails = window.createThumbnails;
 
 
   var onSuccess = function (data) {
     showFilters();
-    updatePhotosList(data)
+    updatePhotosList(data);
+    showPreview(data);
   };
 
   var onError = function (errorMessage) {
