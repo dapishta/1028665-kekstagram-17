@@ -4,7 +4,7 @@
 (function () {
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
-  var lastTimeout;
+
 
   var utils = {
     isEscEvent: function (evt, action) {
@@ -33,13 +33,17 @@
     insertTag: function (tagToBeInserted, tagWhereToInsert) {
       tagWhereToInsert.appendChild(tagToBeInserted);
     },
-    debounce: function (action, interval, data) {
-      if (lastTimeout) {
-        window.clearTimeout(lastTimeout);
+    debounce: function (action, interval) {
+      var lastTimeout;
+      return function () {
+        if (lastTimeout) {
+          window.clearTimeout(lastTimeout);
+        }
+
+        lastTimeout = window.setTimeout(function () {
+          action();
+        }, interval);
       }
-      lastTimeout = window.setTimeout(function () {
-        action(data);
-      }, interval);
     },
     removeChildren: function (childrenClassName, parentTag) {
       var children = parentTag.querySelectorAll(childrenClassName);

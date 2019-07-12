@@ -2,17 +2,15 @@
 'use strict';
 
 (function () {
-  // var NUMBER_OF_PHOTOS = 25;
-  // var utils = window.utils;
-  // var insertTag = utils.insertTag;
   var showFilters = window.showFilters;
   var updatePhotosList = window.updatePhotosList;
-  // var createThumbnails = window.createThumbnails;
+  var savePhotos = window.savePhotos;
 
 
   var onSuccess = function (data) {
     showFilters();
-    updatePhotosList(data)
+    savePhotos(data);
+    updatePhotosList();
   };
 
   var onError = function (errorMessage) {
