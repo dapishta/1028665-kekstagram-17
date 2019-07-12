@@ -20,6 +20,7 @@
   var newPhotos = [];
   var discussedPhotos = [];
   var createdPhotosFragmentTag;
+  var showPreview = window.showPreview;
 
 
   var likesComparator = function (left, right) {
@@ -32,7 +33,24 @@
     }
   };
 
+  var findPhoto = function (address) {
+    for (var i = 0; i < photos.length; i++) {
+      if (photos[i].url === address) {
+        return photos[i];
+      }
+    }
+    return '-1'
+  }
+
+  var onThumbnailClick = function (evt) {
+    var clickedThumbnailAddress = evt.target.getAttribute('src');
+    var foundPhoto = findPhoto(clickedThumbnailAddress);
+    showPreview(foundPhoto);
+
+  };
+
   var updatePhotosList = function (data) {
+
     photos = data;
     removeChildren('.picture', photoListTag);
 
@@ -62,7 +80,12 @@
     }
 
     insertTag(createdPhotosFragmentTag, photoListTag);
+    var renderedPhotos = photoListTag.querySelectorAll('.picture');
+    for (var i = 0; i < renderedPhotos.length; i++) {
+      renderedPhotos[i].addEventListener('click', onThumbnailClick);
+    }
   };
+
 
   var showFilters = function () {
     removeClass(filtersListTag, 'img-filters--inactive');
