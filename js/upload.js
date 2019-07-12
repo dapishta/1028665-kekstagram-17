@@ -7,6 +7,7 @@
   var addScaleEventListeners = window.addScaleEventListeners;
   var checkHashTags = window.checkHashTags;
   var save = window.save;
+  var getDefaultFilter = window.getDefaultFilter;
 
   // Pop-up
   var uploadBtnTag = document.querySelector('#upload-file');
@@ -78,19 +79,38 @@
 
   var onSaveSuccess = function () {
     closePopup();
+    getDefaultFilter();
   };
 
-  var onSaveError = function (errorMessage) {
-    var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
+  var onSaveError = function () {
+    var errorPopup = document.querySelector('#error').content;
+    var main = document.getElementsByTagName('main')[0];
 
+    main.appendChild(errorPopup);
+    var insertedError = document.querySelector('.error');
+
+    var onOutsidePopupClick = function (evt) {
+      if (evt.target === insertedError) {
+        main.removeChild(insertedError);
+      }
+    }
+    insertedError.addEventListener('click', onOutsidePopupClick);
+
+    var closeError = function () {
+
+    }
+
+    var errorBtn = document.querySelector('.error__button');
+    errorBtn.addEventListener('click', function () {
+      closeError();
+    })
+
+    var onErrorEscPress = function (evt) {
+      utils.isEscEvent(evt, closeError);
+    };
+    document.addEventListener('keydown', onErrorEscPress);
+
+  }
 })();
 // Constants
 

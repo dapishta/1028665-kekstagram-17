@@ -104,6 +104,12 @@
     });
   }
 
+  var getDefaultFilter = function () {
+    chosenFilter = 'popular';
+    updatePhotosList(photos)
+  }
+
   window.showFilters = showFilters;
   window.updatePhotosList = updatePhotosList;
+  window.getDefaultFilter = getDefaultFilter;
 })();
