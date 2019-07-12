@@ -34,3 +34,27 @@
 
   window.load = load;
 })();
+
+(function () {
+  var URL = 'https://js.dump.academy/kekstagram';
+  var save = function (data, onSuccess, onError) {
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', URL);
+    xhr.responseType = 'json';
+
+    xhr.addEventListener('load', function () {
+      if (xhr.status === 200) {
+        onSuccess(xhr.response);
+      } else {
+        onError('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);
+      }
+    });
+
+
+    xhr.send(data);
+  };
+
+  window.save = save;
+})();
+
