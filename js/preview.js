@@ -5,6 +5,7 @@
 
   var utils = window.utils;
   var removeClass = utils.removeClass;
+  var removeChildren = utils.removeChildren;
   var getRandomNumber = utils.getRandomNumber;
   var addClass = utils.addClass;
   var previewPopupTag = document.querySelector('.big-picture');
@@ -14,8 +15,10 @@
   var previewCommentsCountTag = previewPopupTag.querySelector('.comments-count');
   var previewCommentsListTag = previewPopupTag.querySelector('.social__comments');
   var previewSocialCommentsCountTag = previewPopupTag.querySelector('.social__comment-count');
-  var previewCommentsLoaderTag = previewPopupTag.querySelector('.comments-loader');
+  var commentsLoaderBtnTag = previewPopupTag.querySelector('.social__comments-loader');
+  // var previewCommentsLoaderTag = previewPopupTag.querySelector('.comments-loader');
   var previewCloseBtnTag = previewPopupTag.querySelector('.big-picture__cancel');
+  var NUMBER_OF_COMMENTS_PORTION = 5;
 
   var renderComment = function (data) {
     var comment = document.createElement('li');
@@ -35,9 +38,10 @@
 
   var showPreview = function (data) {
     var fragment = document.createDocumentFragment();
+    removeChildren('.social__comment', previewCommentsListTag)
     removeClass(previewPopupTag, 'hidden');
     addClass(previewSocialCommentsCountTag, 'visually-hidden');
-    addClass(previewCommentsLoaderTag, 'visually-hidden');
+    // addClass(previewCommentsLoaderTag, 'visually-hidden');
 
     previewImgTag.src = data.url;
     previewLikesTag.textContent = data.likes;
@@ -45,13 +49,24 @@
     previewCaptionTag.textContent = data.description;
     var comments = data.comments;
 
-    for (var i = 0; i < data.comments.length; i++) {
+    for (var i = 0; i < NUMBER_OF_COMMENTS_PORTION; i++) {
       var createdComment = renderComment(comments[i]);
       fragment.appendChild(createdComment);
+    }
+
+    var onCommentsLoaderTagClick = function () {
+      var loadedPortion = document.createDocumentFragment();
+
+      for (var y = NUMBER_OF_COMMENTS_PORTION - 1; y < data.comments.length; y++) {
+        var loadedCreatedComment = renderComment(comments[y]);
+        loadedPortion.appendChild(loadedCreatedComment);
+      }
+      previewCommentsListTag.appendChild(loadedPortion);
     }
     previewCommentsListTag.appendChild(fragment);
     previewCloseBtnTag.addEventListener('click', onPopupCloseBtnTagClick);
     document.addEventListener('keydown', onPopupEscPress);
+    commentsLoaderBtnTag.addEventListener('click', onCommentsLoaderTagClick)
 
   }
 
