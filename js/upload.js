@@ -28,14 +28,14 @@
     uploadCancelBtnTag.addEventListener('click', onPopupCancelTagClick);
     uploadForm.addEventListener('focusin', function () {
       document.removeEventListener('keydown', onPopupEscPress);
-    })
+    });
 
     uploadHashTagsInputTag.addEventListener('input', function () {
       checkHashTags();
     });
     uploadForm.addEventListener('focusout', function () {
       document.addEventListener('keydown', onPopupEscPress);
-    })
+    });
 
     uploadForm.addEventListener('submit', onSaveBtnTagSubmit);
 
@@ -55,11 +55,11 @@
   // Handlers
   var onPopupCancelTagClick = function () {
     closePopup();
-  }
+  };
 
   var onPopupEscPress = function (evt) {
     utils.isEscEvent(evt, closePopup);
-  }
+  };
 
   var onUploadBtnTagClick = function () {
     openPopup();
@@ -97,7 +97,7 @@
     insertedError.addEventListener('click', onOutsidePopupClick);
 
     var closeError = function () {
-
+      main.removeChild(insertedError);
     }
 
     var errorBtn = document.querySelector('.error__button');

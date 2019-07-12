@@ -24,7 +24,7 @@
       tag.classList.add(className);
     },
     getRandomNumber: function (min, max) {
-      return Math.round(Math.random() * (max - min) + min)
+      return Math.round(Math.random() * (max - min) + min);
     },
     getString: function (array, min, max) {
       var randomNumber = Math.round(Math.random() * (max - min) + min);
@@ -48,7 +48,7 @@
       }
 
     }
-  }
+  };
 
   window.utils = utils;
 

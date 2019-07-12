@@ -35,28 +35,28 @@
   var addFiltersEventListeners = function () {
     effectChromeTag.addEventListener('click', function () {
       addFilter(effectChromeStyle);
-    })
+    });
 
     effectSepiaTag.addEventListener('click', function () {
       addFilter(effectSepiaStyle);
-    })
+    });
 
     effectMarvinTag.addEventListener('click', function () {
       addFilter(effectMarvinStyle);
-    })
+    });
 
     effectPhobosTag.addEventListener('click', function () {
       addFilter(effectPhobosStyle);
-    })
+    });
 
     effectHeatTag.addEventListener('click', function () {
       addFilter(effectHeatStyle);
-    })
+    });
 
     effectNoneTag.addEventListener('click', function () {
       utils.removeClass(uploadedImgTag, currentFilter);
       utils.addClass(effectSliderTag, 'hidden');
-    })
+    });
 
     effectPinSliderTag.addEventListener('mousedown', function (evt) {
       var startCoordsX = evt.clientX;
@@ -67,7 +67,7 @@
         var calculateShiftPercentage = function () {
           var num = shiftX * 100 / effectSliderWidth;
           return num.toFixed(2);
-        }
+        };
         var shiftPercentage = calculateShiftPercentage();
 
         currentPinPercentage = startCoordsPercentage - shiftPercentage;
@@ -85,7 +85,7 @@
 
         var calculateFilterStrength = function (min, max) {
           return (max - min) / 100 * currentPinPercentage + min;
-        }
+        };
 
         if (currentFilter === effectChromeStyle) {
           uploadedImgTag.style.filter = 'grayscale(' + calculateFilterStrength(0, 1) + ')';
@@ -102,7 +102,7 @@
         if (currentFilter === effectHeatStyle) {
           uploadedImgTag.style.filter = 'brightness(' + calculateFilterStrength(1, 3) + ')';
         }
-      }
+      };
 
       var onMouseUp = function () {
         document.removeEventListener('mousemove', onMouseMove);
@@ -111,7 +111,7 @@
 
       document.addEventListener('mousemove', onMouseMove);
       document.addEventListener('mouseup', onMouseUp);
-    })
+    });
   };
 
   var addFilter = function (filter) {
@@ -125,7 +125,7 @@
     effectLevelDepthTag.style.width = '100%';
     effectPinSliderTag.style.left = '100%';
     utils.removeClass(effectSliderTag, 'hidden');
-  }
+  };
 
   window.addFiltersEventListeners = addFiltersEventListeners;
 })();

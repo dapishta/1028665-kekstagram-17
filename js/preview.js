@@ -33,7 +33,7 @@
     text.textContent = data.message;
     comment.appendChild(text);
     return comment;
-  }
+  };
 
 
   var showPreview = function (data) {
@@ -62,13 +62,13 @@
         loadedPortion.appendChild(loadedCreatedComment);
       }
       previewCommentsListTag.appendChild(loadedPortion);
-    }
+    };
     previewCommentsListTag.appendChild(fragment);
     previewCloseBtnTag.addEventListener('click', onPopupCloseBtnTagClick);
     document.addEventListener('keydown', onPopupEscPress);
-    commentsLoaderBtnTag.addEventListener('click', onCommentsLoaderTagClick)
+    commentsLoaderBtnTag.addEventListener('click', onCommentsLoaderTagClick);
 
-  }
+  };
 
   var closePreview = function () {
     document.removeEventListener('keydown', onPopupEscPress);

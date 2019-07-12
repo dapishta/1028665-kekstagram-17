@@ -21,39 +21,39 @@
             }
           }
           return counter;
-        }
+        };
 
         var checkSimilarityOfHashes = function () {
           var counter = 0;
           for (var c = 0; c < hashTags.length; c++) {
             if (hashTags[i] === hashTags[c]) {
-              counter++
+              counter++;
             }
           }
           return counter;
-        }
+        };
         var numberOfHashes = checkNumberOfHashes();
         var numberOfSimilarities = checkSimilarityOfHashes();
 
         if (hashTags[i].charAt(0) !== '#') {
-          uploadHashTagsInputTag.setCustomValidity('Пожалуйста, добавьте # в начало тега')
+          uploadHashTagsInputTag.setCustomValidity('Пожалуйста, добавьте # в начало тега');
         } else if (hashTags[i] === '#') {
-          uploadHashTagsInputTag.setCustomValidity('Пожалуйста, удалите тег с пустой решеткой')
+          uploadHashTagsInputTag.setCustomValidity('Пожалуйста, удалите тег с пустой решеткой');
         } else if (numberOfHashes > 1) {
-          uploadHashTagsInputTag.setCustomValidity('Пожалуйста, разделите теги пробелами')
+          uploadHashTagsInputTag.setCustomValidity('Пожалуйста, разделите теги пробелами');
         } else if (numberOfSimilarities > 1) {
-          uploadHashTagsInputTag.setCustomValidity('Пожалуйста, удалите повторяющийся тег')
+          uploadHashTagsInputTag.setCustomValidity('Пожалуйста, удалите повторяющийся тег');
         } else if (hashTags.length > 5) {
-          uploadHashTagsInputTag.setCustomValidity('Пожалуйста, удалите ' + (hashTags.length - 5) + ' тег')
+          uploadHashTagsInputTag.setCustomValidity('Пожалуйста, удалите ' + (hashTags.length - 5) + ' тег');
         } else if (hashTags[i].length > 20) {
-          uploadHashTagsInputTag.setCustomValidity('Уменьшите количество знаков в "' + hashTags[i] + '" хештеге. Не может быть более 20 символов.')
+          uploadHashTagsInputTag.setCustomValidity('Уменьшите количество знаков в "' + hashTags[i] + '" хештеге. Не может быть более 20 символов.');
         } else {
           uploadHashTagsInputTag.setCustomValidity('');
         }
       }
 
     }
-  }
+  };
 
   window.checkHashTags = checkHashTags;
 })();

@@ -22,7 +22,7 @@
       newValue = 25;
     }
     return newValue;
-  }
+  };
 
   var updateScale = function (number) {
     scaleInputTag.setAttribute('value', number);

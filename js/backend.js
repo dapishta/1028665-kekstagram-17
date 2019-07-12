@@ -30,7 +30,7 @@
     });
 
     xhr.timeout = 10000; // 10s
-  }
+  };
 
   window.load = load;
 })();

@@ -39,8 +39,8 @@
         return photos[i];
       }
     }
-    return '-1'
-  }
+    return '-1';
+  };
 
   var onThumbnailClick = function (evt) {
     var clickedThumbnailAddress = evt.target.getAttribute('src');
@@ -102,12 +102,12 @@
       chosenFilter = 'discussed';
       debounce(updatePhotosList, 500, photos);
     });
-  }
+  };
 
   var getDefaultFilter = function () {
     chosenFilter = 'popular';
-    updatePhotosList(photos)
-  }
+    updatePhotosList(photos);
+  };
 
   window.showFilters = showFilters;
   window.updatePhotosList = updatePhotosList;
