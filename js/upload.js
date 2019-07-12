@@ -93,24 +93,24 @@
       if (evt.target === insertedError) {
         main.removeChild(insertedError);
       }
-    }
+    };
     insertedError.addEventListener('click', onOutsidePopupClick);
 
     var closeError = function () {
       main.removeChild(insertedError);
-    }
+    };
 
     var errorBtn = document.querySelector('.error__button');
     errorBtn.addEventListener('click', function () {
       closeError();
-    })
+    });
 
     var onErrorEscPress = function (evt) {
       utils.isEscEvent(evt, closeError);
     };
     document.addEventListener('keydown', onErrorEscPress);
 
-  }
+  };
 })();
 // Constants
 

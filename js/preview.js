@@ -38,7 +38,7 @@
 
   var showPreview = function (data) {
     var fragment = document.createDocumentFragment();
-    removeChildren('.social__comment', previewCommentsListTag)
+    removeChildren('.social__comment', previewCommentsListTag);
     removeClass(previewPopupTag, 'hidden');
     addClass(previewSocialCommentsCountTag, 'visually-hidden');
     // addClass(previewCommentsLoaderTag, 'visually-hidden');
@@ -74,15 +74,15 @@
     document.removeEventListener('keydown', onPopupEscPress);
     previewCloseBtnTag.removeEventListener('click', onPopupCloseBtnTagClick);
     addClass(previewPopupTag, 'hidden');
-  }
+  };
 
   var onPopupEscPress = function (evt) {
     utils.isEscEvent(evt, closePreview);
-  }
+  };
 
   var onPopupCloseBtnTagClick = function () {
     closePreview();
-  }
+  };
 
   window.showPreview = showPreview;
 

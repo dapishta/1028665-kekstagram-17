@@ -28,7 +28,7 @@
     scaleInputTag.setAttribute('value', number);
     var cssScale = number / 100;
     uploadedImgTag.style.transform = 'scale(' + cssScale + ')';
-  }
+  };
 
   var onScaleBtnSmallerClick = function () {
     updateScale(getNewStepperValue(-SCALE_PERCENTAGE));
@@ -40,13 +40,13 @@
 
   var addScaleEventListeners = function () {
     scaleBtnSmallerTag.addEventListener('click', onScaleBtnSmallerClick);
-    scaleBtnBiggerTag.addEventListener('click', onScaleBtnBiggerClick)
-  }
+    scaleBtnBiggerTag.addEventListener('click', onScaleBtnBiggerClick);
+  };
 
   var removeScaleEventListeners = function () {
     scaleBtnSmallerTag.addEventListener('click', onScaleBtnSmallerClick);
-    scaleBtnBiggerTag.addEventListener('click', onScaleBtnBiggerClick)
-  }
+    scaleBtnBiggerTag.addEventListener('click', onScaleBtnBiggerClick);
+  };
 
   window.addScaleEventListeners = addScaleEventListeners;
   window.removeScaleEventListeners = removeScaleEventListeners;
