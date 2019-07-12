@@ -63,7 +63,7 @@
 
   var onUploadBtnTagClick = function () {
     openPopup();
-    uploadedImgTag.src = window.URL.createObjectURL(uploadBtnTag.files[0])
+    uploadedImgTag.src = window.URL.createObjectURL(uploadBtnTag.files[0]);
   };
 
   uploadBtnTag.addEventListener('change', onUploadBtnTagClick);
