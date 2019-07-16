@@ -1,9 +1,8 @@
-/* eslint-disable semi */
 'use strict';
 
 
 (function () {
-  // Scale
+
   var uploadPopupTag = document.querySelector('.img-upload__overlay');
   var scaleBtnSmallerTag = uploadPopupTag.querySelector('.scale__control--smaller');
   var scaleBtnBiggerTag = uploadPopupTag.querySelector('.scale__control--bigger');
@@ -12,7 +11,6 @@
   var SCALE_PERCENTAGE = 25;
 
 
-  // Change scale
   var getNewStepperValue = function (scaleValue) {
     var currentValue = parseInt(scaleInputTag.value, 10);
     var newValue = currentValue + scaleValue;
@@ -44,10 +42,11 @@
   };
 
   var removeScaleEventListeners = function () {
-    scaleBtnSmallerTag.addEventListener('click', onScaleBtnSmallerClick);
-    scaleBtnBiggerTag.addEventListener('click', onScaleBtnBiggerClick);
+    scaleBtnSmallerTag.removeEventListener('click', onScaleBtnSmallerClick);
+    scaleBtnBiggerTag.removeEventListener('click', onScaleBtnBiggerClick);
   };
 
+  window.updateScale = updateScale;
   window.addScaleEventListeners = addScaleEventListeners;
   window.removeScaleEventListeners = removeScaleEventListeners;
 })();

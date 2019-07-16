@@ -1,4 +1,3 @@
-/* eslint-disable semi */
 'use strict';
 
 (function () {
@@ -27,7 +26,7 @@
       return Math.round(Math.random() * (max - min) + min);
     },
     getString: function (array, min, max) {
-      var randomNumber = Math.round(Math.random() * (max - min) + min);
+      var randomNumber = utils.getRandomNumber(min, max);
       return array[randomNumber];
     },
     insertTag: function (tagToBeInserted, tagWhereToInsert) {

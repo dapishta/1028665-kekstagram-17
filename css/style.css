@@ -387,6 +387,15 @@ main {
   outline: auto 5px highlight;
 }
 
+input:invalid {
+  border: 4px solid red;
+  background-color:rgb(247, 176, 176);
+}
+
+input:valid {
+  border: none;
+}
+
 
 /* Окно для редактирования изображения
    ========================================================================== */

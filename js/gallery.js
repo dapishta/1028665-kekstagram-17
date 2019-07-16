@@ -1,18 +1,14 @@
-/* eslint-disable semi */
 'use strict';
 
 (function () {
-  // var NUMBER_OF_PHOTOS = 25;
-  // var utils = window.utils;
-  // var insertTag = utils.insertTag;
   var showFilters = window.showFilters;
   var updatePhotosList = window.updatePhotosList;
-  // var createThumbnails = window.createThumbnails;
-
+  var getPhotosData = window.getPhotosData;
 
   var onSuccess = function (data) {
+    getPhotosData(data);
     showFilters();
-    updatePhotosList(data);
+    updatePhotosList('popular');
   };
 
   var onError = function (errorMessage) {

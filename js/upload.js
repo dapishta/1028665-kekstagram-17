@@ -1,4 +1,3 @@
-/* eslint-disable semi */
 'use strict';
 
 (function () {
@@ -8,8 +7,10 @@
   var checkHashTags = window.checkHashTags;
   var save = window.save;
   var getDefaultFilter = window.getDefaultFilter;
+  var showResultPopup = window.showResultPopup;
+  var getDefaultImgFilter = window.getDefaultImgFilter;
+  var updateScale = window.updateScale;
 
-  // Pop-up
   var uploadBtnTag = document.querySelector('#upload-file');
   var uploadPopupTag = document.querySelector('.img-upload__overlay');
   var uploadedImgTag = uploadPopupTag.querySelector('.img-upload__preview img');
@@ -19,9 +20,7 @@
   var removeScaleEventListeners = window.removeScaleEventListeners;
   var uploadDescriptionInputTag = uploadPopupTag.querySelector('.text__description');
   var uploadHashTagsInputTag = uploadPopupTag.querySelector('.text__hashtags');
-  // var uploadSubmitBtnTag = uploadPopupTag.querySelector('.img-upload__submit');
 
-  // Open and close popup
   var openPopup = function () {
     utils.removeClass(uploadPopupTag, 'hidden');
     document.addEventListener('keydown', onPopupEscPress);
@@ -30,9 +29,6 @@
       document.removeEventListener('keydown', onPopupEscPress);
     });
 
-    uploadHashTagsInputTag.addEventListener('input', function () {
-      checkHashTags();
-    });
     uploadForm.addEventListener('focusout', function () {
       document.addEventListener('keydown', onPopupEscPress);
     });
@@ -50,11 +46,14 @@
     uploadHashTagsInputTag.value = '';
     uploadDescriptionInputTag.value = '';
     removeScaleEventListeners();
+    getDefaultImgFilter();
+    getDefaultFilter();
+    updateScale(100);
   };
 
-  // Handlers
   var onPopupCancelTagClick = function () {
     closePopup();
+
   };
 
   var onPopupEscPress = function (evt) {
@@ -68,48 +67,22 @@
 
   uploadBtnTag.addEventListener('change', onUploadBtnTagClick);
 
-  // Saving
 
   var onSaveBtnTagSubmit = function (evt) {
     evt.preventDefault();
     checkHashTags();
     save(new FormData(uploadForm), onSaveSuccess, onSaveError);
-
   };
+
 
   var onSaveSuccess = function () {
     closePopup();
-    getDefaultFilter();
+    showResultPopup('success');
   };
 
   var onSaveError = function () {
-    var errorPopup = document.querySelector('#error').content;
-    var main = document.getElementsByTagName('main')[0];
-
-    main.appendChild(errorPopup);
-    var insertedError = document.querySelector('.error');
-
-    var onOutsidePopupClick = function (evt) {
-      if (evt.target === insertedError) {
-        main.removeChild(insertedError);
-      }
-    };
-    insertedError.addEventListener('click', onOutsidePopupClick);
-
-    var closeError = function () {
-      main.removeChild(insertedError);
-    };
-
-    var errorBtn = document.querySelector('.error__button');
-    errorBtn.addEventListener('click', function () {
-      closeError();
-    });
-
-    var onErrorEscPress = function (evt) {
-      utils.isEscEvent(evt, closeError);
-    };
-    document.addEventListener('keydown', onErrorEscPress);
-
+    closePopup();
+    showResultPopup('error');
   };
 })();
 // Constants

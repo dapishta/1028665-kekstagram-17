@@ -1,4 +1,3 @@
-/* eslint-disable semi */
 'use strict';
 
 (function () {
@@ -12,10 +11,6 @@
     var photoItemLikesTag = photoItemTag.querySelector('.picture__likes');
     var photoItemCommentsTag = photoItemTag.querySelector('.picture__comments');
     var fragment = document.createDocumentFragment();
-
-    // var onThumbnailClick = function () {
-    //   console.log(photoItemImgTag.src);
-    // }
 
     for (var i = 0; i < number; i++) {
       photoItemImgTag.src = array[i].url;

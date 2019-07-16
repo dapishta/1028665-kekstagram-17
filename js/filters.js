@@ -1,18 +1,20 @@
-/* eslint-disable semi */
 'use strict';
 
 (function () {
   var utils = window.utils;
+  var isEnterEvent = utils.isEnterEvent;
+  var addThumbnailsEventListeners = window.addThumbnailsEventListeners;
 
   var uploadPopupTag = document.querySelector('.img-upload__overlay');
   var uploadedImgTag = uploadPopupTag.querySelector('.img-upload__preview img');
   var effectsListTag = uploadPopupTag.querySelector('.effects__list');
-  var effectNoneTag = effectsListTag.querySelector('#effect-none');
-  var effectChromeTag = effectsListTag.querySelector('#effect-chrome');
-  var effectSepiaTag = effectsListTag.querySelector('#effect-sepia');
-  var effectMarvinTag = effectsListTag.querySelector('#effect-marvin');
-  var effectPhobosTag = effectsListTag.querySelector('#effect-phobos');
-  var effectHeatTag = effectsListTag.querySelector('#effect-heat');
+
+  var effectNoneTag = effectsListTag.querySelector('.effects__preview--none');
+  var effectChromeTag = effectsListTag.querySelector('.effects__preview--chrome');
+  var effectSepiaTag = effectsListTag.querySelector('.effects__preview--sepia');
+  var effectMarvinTag = effectsListTag.querySelector('.effects__preview--marvin');
+  var effectPhobosTag = effectsListTag.querySelector('.effects__preview--phobos');
+  var effectHeatTag = effectsListTag.querySelector('.effects__preview--heat');
 
   var effectChromeStyle = 'effects__preview--chrome';
   var effectSepiaStyle = 'effects__preview--sepia';
@@ -28,34 +30,86 @@
   var currentPinPercentage = 100;
   var currentFilter = false;
 
+
   if (!currentFilter) {
     utils.addClass(effectSliderTag, 'hidden');
   }
 
-  var addFiltersEventListeners = function () {
-    effectChromeTag.addEventListener('click', function () {
-      addFilter(effectChromeStyle);
-    });
-
-    effectSepiaTag.addEventListener('click', function () {
-      addFilter(effectSepiaStyle);
-    });
-
-    effectMarvinTag.addEventListener('click', function () {
-      addFilter(effectMarvinStyle);
-    });
-
-    effectPhobosTag.addEventListener('click', function () {
-      addFilter(effectPhobosStyle);
-    });
-
-    effectHeatTag.addEventListener('click', function () {
-      addFilter(effectHeatStyle);
-    });
-
-    effectNoneTag.addEventListener('click', function () {
+  var onFilterClick = function (evt) {
+    if (evt.target === effectNoneTag) {
       utils.removeClass(uploadedImgTag, currentFilter);
       utils.addClass(effectSliderTag, 'hidden');
+    }
+
+    if (evt.target === effectChromeTag) {
+      addFilter(effectChromeStyle);
+    }
+
+    if (evt.target === effectSepiaTag) {
+      addFilter(effectSepiaStyle);
+    }
+
+
+    if (evt.target === effectMarvinTag) {
+      addFilter(effectMarvinStyle);
+    }
+
+    if (evt.target === effectPhobosTag) {
+      addFilter(effectPhobosStyle);
+    }
+
+    if (evt.target === effectHeatTag) {
+      addFilter(effectHeatStyle);
+    }
+  };
+
+  var onFilterPress = function (evt) {
+    if (evt.target === effectNoneTag) {
+      isEnterEvent(evt, function () {
+        utils.removeClass(uploadedImgTag, currentFilter);
+        utils.addClass(effectSliderTag, 'hidden');
+      });
+    }
+
+    if (evt.target === effectChromeTag) {
+      isEnterEvent(evt, function () {
+        addFilter(effectChromeStyle);
+      });
+    }
+
+    if (evt.target === effectSepiaTag) {
+      isEnterEvent(evt, function () {
+        addFilter(effectSepiaStyle);
+      });
+    }
+
+    if (evt.target === effectMarvinTag) {
+      isEnterEvent(evt, function () {
+        addFilter(effectMarvinStyle);
+      });
+    }
+
+    if (evt.target === effectPhobosTag) {
+      isEnterEvent(evt, function () {
+        addFilter(effectPhobosStyle);
+      });
+    }
+
+    if (evt.target === effectHeatTag) {
+      isEnterEvent(evt, function () {
+        addFilter(effectHeatStyle);
+      });
+    }
+
+  };
+
+  var addFiltersEventListeners = function () {
+
+    var filters = effectsListTag.querySelectorAll('.effects__item');
+    addThumbnailsEventListeners(filters, function (evt) {
+      onFilterClick(evt);
+    }, function (evt) {
+      onFilterPress(evt);
     });
 
     effectPinSliderTag.addEventListener('mousedown', function (evt) {
@@ -65,8 +119,8 @@
       var onMouseMove = function (moveEvt) {
         var shiftX = startCoordsX - moveEvt.clientX;
         var calculateShiftPercentage = function () {
-          var num = shiftX * 100 / effectSliderWidth;
-          return num.toFixed(2);
+          var number = shiftX * 100 / effectSliderWidth;
+          return number.toFixed(2);
         };
         var shiftPercentage = calculateShiftPercentage();
 
@@ -127,5 +181,15 @@
     utils.removeClass(effectSliderTag, 'hidden');
   };
 
+
+  var getDefaultImgFilter = function () {
+    utils.removeClass(uploadedImgTag, currentFilter);
+    uploadedImgTag.style.filter = '';
+    startCoordsPercentage = 100;
+    utils.addClass(effectSliderTag, 'hidden');
+    currentFilter = false;
+  };
+
   window.addFiltersEventListeners = addFiltersEventListeners;
+  window.getDefaultImgFilter = getDefaultImgFilter;
 })();
