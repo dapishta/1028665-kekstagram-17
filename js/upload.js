@@ -4,7 +4,6 @@
 
   var utils = window.utils;
   var addScaleEventListeners = window.addScaleEventListeners;
-  var checkHashTags = window.checkHashTags;
   var save = window.save;
   var getDefaultFilter = window.getDefaultFilter;
   var showResultPopup = window.showResultPopup;
@@ -22,7 +21,6 @@
   var uploadDescriptionInputTag = uploadPopupTag.querySelector('.text__description');
   var uploadHashTagsInputTag = uploadPopupTag.querySelector('.text__hashtags');
   var saveBtnTag = uploadPopupTag.querySelector('.img-upload__submit');
-  var error;
 
   var openPopup = function () {
     utils.removeClass(uploadPopupTag, 'hidden');
@@ -71,8 +69,7 @@
   uploadBtnTag.addEventListener('change', onUploadBtnTagClick);
 
   var checkCustomValidity = function () {
-    error = checkHashTags();
-    setCustomValidity(error);
+    setCustomValidity();
   };
   var onSaveBtnTagClick = function () {
     checkCustomValidity();
