@@ -10,6 +10,7 @@
   var showResultPopup = window.showResultPopup;
   var getDefaultImgFilter = window.getDefaultImgFilter;
   var updateScale = window.updateScale;
+  var setCustomValidity = window.setCustomValidity;
 
   var uploadBtnTag = document.querySelector('#upload-file');
   var uploadPopupTag = document.querySelector('.img-upload__overlay');
@@ -20,6 +21,8 @@
   var removeScaleEventListeners = window.removeScaleEventListeners;
   var uploadDescriptionInputTag = uploadPopupTag.querySelector('.text__description');
   var uploadHashTagsInputTag = uploadPopupTag.querySelector('.text__hashtags');
+  var saveBtnTag = uploadPopupTag.querySelector('.img-upload__submit');
+  var error;
 
   var openPopup = function () {
     utils.removeClass(uploadPopupTag, 'hidden');
@@ -34,7 +37,8 @@
     });
 
     uploadForm.addEventListener('submit', onSaveBtnTagSubmit);
-
+    saveBtnTag.addEventListener('click', onSaveBtnTagClick);
+    saveBtnTag.addEventListener('keydown', onSaveBtnTagPress);
     addScaleEventListeners();
     addFiltersEventListeners();
   };
@@ -53,7 +57,6 @@
 
   var onPopupCancelTagClick = function () {
     closePopup();
-
   };
 
   var onPopupEscPress = function (evt) {
@@ -67,10 +70,21 @@
 
   uploadBtnTag.addEventListener('change', onUploadBtnTagClick);
 
+  var checkCustomValidity = function () {
+    error = checkHashTags();
+    setCustomValidity(error);
+  };
+  var onSaveBtnTagClick = function () {
+    checkCustomValidity();
+  };
+
+  var onSaveBtnTagPress = function (evt) {
+    utils.isEnterEvent(evt, checkCustomValidity);
+  };
+
 
   var onSaveBtnTagSubmit = function (evt) {
     evt.preventDefault();
-    checkHashTags();
     save(new FormData(uploadForm), onSaveSuccess, onSaveError);
   };
 
