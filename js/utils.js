@@ -3,7 +3,6 @@
 (function () {
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
-  var lastTimeout;
 
   var utils = {
     isEscEvent: function (evt, action) {
@@ -25,20 +24,8 @@
     getRandomNumber: function (min, max) {
       return Math.round(Math.random() * (max - min) + min);
     },
-    getString: function (array, min, max) {
-      var randomNumber = utils.getRandomNumber(min, max);
-      return array[randomNumber];
-    },
     insertTag: function (tagToBeInserted, tagWhereToInsert) {
       tagWhereToInsert.appendChild(tagToBeInserted);
-    },
-    debounce: function (action, interval, data) {
-      if (lastTimeout) {
-        window.clearTimeout(lastTimeout);
-      }
-      lastTimeout = window.setTimeout(function () {
-        action(data);
-      }, interval);
     },
     removeChildren: function (childrenClassName, parentTag) {
       var children = parentTag.querySelectorAll(childrenClassName);
